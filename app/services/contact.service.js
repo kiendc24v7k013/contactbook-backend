@@ -13,6 +13,7 @@ class ContactService {
       address: payload.address,
       phone: payload.phone,
       favorite: payload.favorite,
+      hobby: payload.hobby,
     };
 
     // Remove undefined fields
@@ -60,7 +61,7 @@ class ContactService {
       { returnDocument: "after" },
     );
 
-    return result.value;
+    return result;
   }
 
   async delete(id) {
