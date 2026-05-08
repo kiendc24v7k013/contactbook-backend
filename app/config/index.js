@@ -5,6 +5,10 @@ const config = {
   db: {
     uri: process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/contactbook",
   },
+  jwt: {
+    secret: process.env.JWT_SECRET || "contactbook-secret-key-2024",
+    expiresIn: "24h",
+  },
 };
 
 module.exports = config;

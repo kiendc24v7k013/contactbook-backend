@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const contactsRouter = require("./app/routes/contact.route");
+const authRouter = require("./app/routes/auth.route");
+const verifyToken = require("./app/middlewares/auth.middleware");
 const ApiError = require("./app/api-error");
 
 const app = express();
@@ -8,7 +10,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/contacts", contactsRouter);
+// Route công khai (không cần đăng nhập)
+app.use("/api/auth", authRouter);
+
+// Route được bảo vệ bằng JWT
+app.use("/api/contacts", verifyToken, contactsRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to contact book application." });
